@@ -11,6 +11,16 @@ module Formtastic
   end
 end
 
+module Formtastic
+  class FormBuilder
+    # Prevent sensitive fields from being shown in forms by default
+    # NOTE: Formastic::Helpers::InputsHelper.inputs calls
+    #   ``Formtastic::FormBuilder.skipped_columns`` explicitly so we need to
+    #   monkeypatch instead of use inheritance
+    self.skipped_columns += ActiveAdmin.application.filter_attributes
+  end
+end
+
 module ActiveAdmin
   class FormBuilder < ::Formtastic::FormBuilder
 
