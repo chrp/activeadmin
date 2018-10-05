@@ -22,7 +22,7 @@ module ActiveAdmin
     def self.default_for_resource(resource)
       new resource: resource do
         column :id
-        resource.content_columns.reject { |c| c.to_s.include?('password') }.each { |c| column c }
+        resource.content_columns.each { |c| column c }
       end
     end
 
