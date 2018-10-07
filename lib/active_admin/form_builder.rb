@@ -11,16 +11,6 @@ module Formtastic
   end
 end
 
-module Formtastic
-  class FormBuilder
-    # Prevent sensitive fields from being shown in forms by default
-    # NOTE: Formastic::Helpers::InputsHelper.inputs calls
-    #   ``Formtastic::FormBuilder.skipped_columns`` explicitly so we need to
-    #   monkeypatch instead of use inheritance
-    self.skipped_columns += ActiveAdmin.application.filter_attributes
-  end
-end
-
 module ActiveAdmin
   class FormBuilder < ::Formtastic::FormBuilder
 
@@ -29,6 +19,10 @@ module ActiveAdmin
     # TODO: remove both class finders after formtastic 4 (where it will be default)
     self.input_class_finder = ::Formtastic::InputClassFinder
     self.action_class_finder = ::Formtastic::ActionClassFinder
+
+    # TODO: Waiting for [PR](https://github.com/justinfrench/formtastic/pull/1273)
+    # Prevent sensitive fields from being shown in forms by default
+    # self.skipped_columns += ActiveAdmin.application.filter_attributes
 
     def cancel_link(url = {action: "index"}, html_options = {}, li_attrs = {})
       li_attrs[:class] ||= "cancel"

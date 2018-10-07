@@ -57,7 +57,16 @@ module ActiveAdmin
           end
           insert_tag(SemanticInputsProxy, form_builder, *args, &wrapped_block)
         else
+          # Temporarily alter global Formtastic::FormBuilder config to prevent sensitive fields
+          # from being shown in forms by default. As long as Formastic::Helpers::InputsHelper.inputs
+          # calls this option with an explicit classname there's no better way
+          keep_skipped_columns = Formtastic::FormBuilder.skipped_columns
+          Formtastic::FormBuilder.skipped_columns += ActiveAdmin.application.filter_attributes
+
           proxy_call_to_form(:inputs, *args, &block)
+
+          # Restore global Formtastic::FormBuilder config
+          Formtastic::FormBuilder.skipped_columns = keep_skipped_columns
         end
       end
 
