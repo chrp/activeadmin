@@ -2,6 +2,10 @@
 
 ## Master (unreleased)
 
+### Security Fixes
+
+* Prevent leaking hashed passwords via user CSV export and adds a config option for sensitive attributes [#5486][] by [@chrp][]
+
 ### Bug fixes
 
 * Fixed the string representation of the resolved `sort_key` when no explicit
@@ -292,6 +296,7 @@ Please check [0-6-stable][] for previous changes.
 [#5401]: https://github.com/activeadmin/activeadmin/pull/5401
 [#5464]: https://github.com/activeadmin/activeadmin/pull/5464
 [#5501]: https://github.com/activeadmin/activeadmin/pull/5501
+[#5486]: https://github.com/activeadmin/activeadmin/pull/5486
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
@@ -329,3 +334,4 @@ Please check [0-6-stable][] for previous changes.
 [@varyonic]: https://github.com/varyonic
 [@wspurgin]: https://github.com/wspurgin
 [@zorab47]: https://github.com/zorab47
+[@chrp]: https://github.com/chrp
